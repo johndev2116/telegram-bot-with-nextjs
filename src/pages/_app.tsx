@@ -1,13 +1,27 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import LayOut from "@/layout";
+import LayOut from "@/layout/index";
 import { GlobalContextProvider } from "context/GlobalContext";
-export default function App({ Component, pageProps }: AppProps) {
+import { useRouter } from "next/router";
+import { SessionProvider } from "next-auth/react";
+
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: any) {
+  const router = useRouter();
+
+  const pathname = router.pathname;
   return (
-    <GlobalContextProvider>
-      <LayOut>
+    <SessionProvider session={session}>
+      {pathname === "/signin" ? (
         <Component {...pageProps} />
-      </LayOut>
-    </GlobalContextProvider>
+      ) : (
+        <GlobalContextProvider>
+          <LayOut>
+            <Component {...pageProps} />
+          </LayOut>
+        </GlobalContextProvider>
+      )}
+    </SessionProvider>
   );
 }

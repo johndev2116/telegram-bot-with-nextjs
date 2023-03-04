@@ -26,6 +26,8 @@ export const GlobalContextProvider: React.FC<Props> = ({ children }) => {
     waitingCount: 0,
     studentCount: 0,
     studentAddedThisMonth: 0,
+    studentAddedInLastSevenDays: [],
+    totalCountCount: 0,
   } as Data);
 
   useEffect(() => {
@@ -36,7 +38,6 @@ export const GlobalContextProvider: React.FC<Props> = ({ children }) => {
         setLoading(false);
       } catch (e) {
         setLoading(false);
-        console.log(e);
       }
     })();
   }, []);

@@ -63,3 +63,8 @@ model tutorialClass {
   stream      String @default("na")
   class_tg_id String
 }
+
+model admin {
+  userName String @id
+  password String
+}
